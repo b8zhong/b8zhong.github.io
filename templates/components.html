@@ -1,0 +1,11 @@
+{# Navbar link; components can't see the page context, so the current URL is passed in. #}
+{% component nav_link(path, label, current_url) %}
+{% set href = get_url(path=path) %}
+<a href="{{ href }}"{% if (current_url | trim_end(pat="/")) == (href | trim_end(pat="/")) %} aria-current="page"{% endif %}>{{ label }}</a>
+{% endcomponent nav_link %}
+
+
+{# Renders a string to HTML, replacing newlines with HTML line breaks. #}
+{% component newline_break(str) %}
+{% for line in str | split(pat="\n") %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+{% endcomponent newline_break %}
